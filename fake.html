@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hahaha</title>
+
+    <script>
+        num = 20
+        function fake(mes){
+            alert(mes)
+            for(n=0;n<num;n++){
+            alert((num-n)+"번 남음")
+            }
+            alert("end")
+        }
+
+		var SetTime = 500;
+
+        function msg_time() {	
+            
+            m =SetTime ;	
+            
+            var msg = m ;
+            
+            document.all.ViewTimer.innerHTML = msg;	
+                    
+            SetTime = SetTime-1;
+
+            if (SetTime < 0) {	
+                
+                clearInterval(tid);	
+                fake("Time over");
+                window.location.reload()
+            }
+        }
+        window.onload = function TimerStart(){ tid=setInterval('msg_time()',10) };
+
+        function change(){
+                var userInput = prompt("answer"+"");
+                if(userInput == answer){
+                clearInterval(tid);
+                document.getElementById('hidden').style.display="block";
+            }else if(userInput == "admin"){
+                document.getElementById('hidden').style.display="block";
+                document.getElementById('hidden2').style.display="block"
+            }
+            else{
+                fake("Wrong")
+            }
+            }
+        </script>
+        <style>
+            input{
+        font-size: 200px;
+    }
+        p{
+            font-size: 200px;
+            border: 10px solid red;
+            margin-top: 0ch; 
+            margin-bottom: 0ch;
+     }
+        button{
+            font-size: 200px;   
+        }
+        div{
+            font-size: 100px;
+        }
+        #hidden{
+            display:none;
+        }
+        #hidden2{
+            display:none;
+        }
+        </style>
+</head>
+<body>
+	<div id="ViewTimer"></div>
+    <form action="" method="get" id="input">
+        <button type="button" onclick="fake('Dooooooooooon`t cliiiiiiickkkkkk')">Don't click</button>
+        <div><a id="ran1"></a>X<a id="ran2"></a></div>
+        <input type="button" value="answer!" onclick="
+            change();
+        ">
+    </form>
+    <div id="hidden">Hello</div>   
+    <div id="hidden2">Master
+        <a href="master.html">Here</a>
+    </div>      
+    <script>
+    var ran1= Math.floor(Math.random()*100);
+    document.getElementById("ran1").innerHTML = ran1;
+    var ran2= Math.floor(Math.random()*100);
+    document.getElementById("ran2").innerHTML = ran2;
+    var answer = ran1*ran2;
+    </script>
+</body>
+</html>
+
