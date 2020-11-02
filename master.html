@@ -6,35 +6,35 @@
     <title>Master</title>
 </head>
 <body>
-    https://m.blog.naver.com/PostView.nhn?blogId=roboholic84&logNo=221742752496&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
     
-    <h2>
-     int v;      //속도
-int vmax;       //최대 속도
-int Sigpin =  11 ;  // 신호 입력 핀
-void  setup ()
-{
-  Serial.begin ( 9600 );
-  pinMode (Sigpin , INPUT);
+  #define sensor A0// 선 A0에 연결.
+
+void setup() {
+  Serial.begin(9600);
 }
-void  loop ()
-{ 
-  unsigned  long T;          // 주기
-  double f;                 // 주파수 
-  char s [ 20 ];               // Serial 출력 Length
-  vmax = 0 ;
-  while (digitalRead (Sigpin)); //왜 굳이....
-  while ( ! digitalRead (Sigpin));//왜 굳이....
- 
-  T =pulseIn (Sigpin , HIGH) + pulseIn (Sigpin , LOW); // 주기 측정
-  f = 1 / ( double ) T;            // 주파수 측정
-  v = int ((f * 1e6 ) /44.0 );    // 속도 측정
-  vmax = max (v, vmax);       // 속도의 Max값 측정 ...??(v랑 maxv 비교)
-  sprintf (s, "% 3d km / h" , vmax);  // Serial 출력 ,,문장안에 숫자형 자료를 추가
-  //sprintf (s, "% 3d m / s" , vmax*10/36);//*10/36 는 m/s 
-  Serial.println (s);        // Serial 출력
-  delay ( 500 );              // Delay 500ms
+
+void loop() {
+  float volts = analogRead(sensor) * 0.0048828125; //5V에 연결
+  int distance = 13 * pow(volts, -1);
+  delay(1000);//delay 조절하며 실험..
+  if (distance <= 30) { //30cm가 최대..?
+    Serial.println(distance);
+  }
 }
-    </h2>
-</body>
+
+
+/*
+ * P.S.   float volts = analogRead(IRpin)*0.0048828125;   // value from sensor * (5/1024) - if running 3.3.volts then change 5 to 3.3
+  float distance = 65*pow(volts, -1.10);          // worked out from graph 65 = theretical distance / (1/Volts)S - luckylarry.co.uk
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * /
+ *//body>
 </html>
